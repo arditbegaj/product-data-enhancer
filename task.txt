@@ -1,0 +1,60 @@
+Scenario:
+
+Every day, we pull a large CSV file (images40.txt) with products, parse the file into our format and insert, update or delete products from our database. (the delete step must have a flag and be an option)
+
+Import a very large CSV file, convert the data to the JSON format indicated in the sample-products.json and save it to Mongo. DO NOT import sample-products.json. That serves as an example of the format we are expecting you to convert images40.txt to.
+
+Before saving a product, you need to make sure that all vendors are up to date and you will use the document ids for vendorId and manufacturerId.
+
+At the end of each 
+
+Tech:
+Typescript
+Mongo
+Nestjs + Schedulers
+LangChanTS
+
+Prerequisites: 
+Understand what products with variants is
+Check what data needs to be saved before
+You are the owner of the task, you decide
+If you see a value that is referenced from somewhere else, unknown, just simulate it.
+Deduct the data format based on sample
+
+
+Information:
+There are 2 variants: ItemDescription → description and Packaging → packaging fields
+docId is a internal id we generate with nanoid v4
+Options[].id is just a random string
+There are 100k+ rows that should turn into 13k products (if variants are generated correctly)
+You only have 2GB of RAM available
+Each ProductID must be unique across all records.
+The ItemID must be unique within the context of its respective ProductID group.
+During imports, product data may be modified, requiring updates or deletions of existing products based on the new information.
+When deleting products, consider handling cases where products might already be associated with existing orders and determine the appropriate action.
+To retrieve comprehensive information for a specific product, group all related records by ProductID.
+
+Ignore:
+Categories
+Everything that is not in the data{} in the JSON
+
+
+
+
+Your task:
+
+Import all the products and vendors using a scheduled task that runs once per day.
+All products must have their description field enhanced using OpenAI by passing the name and category. If the product has a description, pass it for enhancement. Some products are missing descriptions, so use only name and category.
+
+
+
+
+
+You are an expert in medical sales. Your specialty is medical consumables used by hospitals on a daily basis. Your task to enhance the description of a product based on the information provided.
+
+Product name: $name
+Product description: $description
+Category: $nameOfCategory
+
+New Description:
+
